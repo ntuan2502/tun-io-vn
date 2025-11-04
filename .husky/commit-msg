@@ -1,0 +1,2 @@
+echo "Validating commit message with Commitlint..."
+bunx commitlint --edit "$1"
