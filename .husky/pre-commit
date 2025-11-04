@@ -1,5 +1,5 @@
-echo "Adding all changes to staging..."
-git add .
+# echo "Adding all changes to staging..."
+# git add .
 
 echo "Running lint before commit..."
 bun run lint
