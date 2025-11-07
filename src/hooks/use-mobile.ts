@@ -1,19 +1,28 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
 export function useIsMobile(breakpoint = 768) {
-  const [isMobile, setIsMobile] = useState<boolean | undefined>(undefined)
+  const [isMobile, setIsMobile] = useState<boolean | undefined>(undefined);
 
   useEffect(() => {
-    const mql = window.matchMedia(`(max-width: ${breakpoint - 1}px)`)
-    const onChange = () => {
-      setIsMobile(window.innerWidth < breakpoint)
-    }
-    mql.addEventListener("change", onChange)
-    setIsMobile(window.innerWidth < breakpoint)
-    return () => mql.removeEventListener("change", onChange)
-  }, [breakpoint])
+    let mounted = true;
+    const mql = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
 
-  return !!isMobile
+    const onChange = () => {
+      if (mounted) {
+        setIsMobile(mql.matches);
+      }
+    };
+
+    mql.addEventListener("change", onChange);
+    onChange(); // Call onChange initially to set the first value
+
+    return () => {
+      mounted = false;
+      mql.removeEventListener("change", onChange);
+    };
+  }, [breakpoint]);
+
+  return !!isMobile;
 }
