@@ -9,7 +9,17 @@ import { SunIcon } from "@/components/tiptap-icons/sun-icon"
 import { useEffect, useState } from "react"
 
 export function ThemeToggle() {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false)
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
+    // Guard access to browser globals to avoid ReferenceError during SSR
+    if (typeof document === "undefined" || typeof window === "undefined") {
+      return false
+    }
+
+    return (
+      !!document.querySelector('meta[name="color-scheme"][content="dark"]') ||
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    )
+  })
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
@@ -18,12 +28,7 @@ export function ThemeToggle() {
     return () => mediaQuery.removeEventListener("change", handleChange)
   }, [])
 
-  useEffect(() => {
-    const initialDarkMode =
-      !!document.querySelector('meta[name="color-scheme"][content="dark"]') ||
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    setIsDarkMode(initialDarkMode)
-  }, [])
+  // Đã chuyển logic khởi tạo vào useState, không cần effect này nữa
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", isDarkMode)
