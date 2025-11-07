@@ -61,9 +61,10 @@ export function useMenuNavigation<T>({
   orientation = "vertical",
   autoSelectFirstItem = true,
 }: MenuNavigationOptions<T>) {
-  const [selectedIndex, setSelectedIndex] = useState<number>(
-    autoSelectFirstItem ? 0 : -1
-  )
+  const [selectedIndex, setSelectedIndex] = useState<number>(() => {
+    // Start as -1 when there are no items. Otherwise follow autoSelectFirstItem.
+    return items.length ? (autoSelectFirstItem ? 0 : -1) : -1
+  })
 
   useEffect(() => {
     const handleKeyboardNavigation = (event: KeyboardEvent) => {
@@ -185,9 +186,30 @@ export function useMenuNavigation<T>({
 
   useEffect(() => {
     if (query) {
-      setSelectedIndex(autoSelectFirstItem ? 0 : -1)
+      // schedule update asynchronously to avoid cascading renders warning
+      setTimeout(() => setSelectedIndex(autoSelectFirstItem ? 0 : -1), 0)
     }
   }, [query, autoSelectFirstItem])
+
+  // Keep selectedIndex in a valid range when `items` changes.
+  useEffect(() => {
+    if (!items.length) {
+      // schedule update asynchronously to avoid cascading renders warning
+      setTimeout(() => setSelectedIndex(-1), 0)
+      return
+    }
+
+    // schedule update asynchronously to avoid cascading renders warning
+    setTimeout(() =>
+      setSelectedIndex((current) => {
+        // If nothing is selected but autoSelect is enabled, pick first.
+        if (current === -1 && autoSelectFirstItem) return 0
+        // If the current index exceeds the new length, clamp to last item.
+        if (current >= items.length) return items.length - 1
+        return current
+      })
+    , 0)
+  }, [items, autoSelectFirstItem])
 
   return {
     selectedIndex: items.length ? selectedIndex : undefined,
