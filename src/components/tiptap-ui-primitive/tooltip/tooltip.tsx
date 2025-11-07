@@ -180,7 +180,6 @@ export const TooltipTrigger = forwardRef<HTMLElement, TooltipTriggerProps>(
       return cloneElement(
         children,
         context.getReferenceProps({
-          ref,
           ...props,
           ...(typeof children.props === "object" ? children.props : {}),
           ...dataAttributes,
