@@ -190,6 +190,7 @@ export function SimpleEditor() {
     "main"
   )
   const toolbarRef = useRef<HTMLDivElement>(null)
+  const [overlayHeight, setOverlayHeight] = useState<number>(0)
 
   const editor = useEditor({
     immediatelyRender: false,
@@ -232,16 +233,33 @@ export function SimpleEditor() {
     content,
   })
 
-  const rect = useCursorVisibility({
-    editor,
-    overlayHeight: toolbarRef.current?.getBoundingClientRect().height ?? 0,
-  })
-
+  // Avoid reading toolbarRef.current during render — compute overlay height in an effect
   useEffect(() => {
-    if (!isMobile && mobileView !== "main") {
-      setMobileView("main")
+    const updateOverlayHeight = () => {
+      setOverlayHeight(toolbarRef.current?.getBoundingClientRect().height ?? 0)
     }
-  }, [isMobile, mobileView])
+
+    updateOverlayHeight()
+
+    // Keep it updated when the toolbar size changes or window resizes
+    let ro: ResizeObserver | null = null
+    if (typeof ResizeObserver !== "undefined" && toolbarRef.current) {
+      ro = new ResizeObserver(() => updateOverlayHeight())
+      ro.observe(toolbarRef.current)
+    }
+
+    window.addEventListener("resize", updateOverlayHeight)
+
+    return () => {
+      if (ro) ro.disconnect()
+      window.removeEventListener("resize", updateOverlayHeight)
+    }
+  }, [])
+
+  const rect = useCursorVisibility({ editor, overlayHeight })
+
+  // When not on mobile, force the toolbar view to the main view without setting state during render
+  const effectiveMobileView = isMobile ? mobileView : "main"
 
   return (
     <div className="simple-editor-wrapper">
@@ -256,7 +274,7 @@ export function SimpleEditor() {
               : {}),
           }}
         >
-          {mobileView === "main" ? (
+          {effectiveMobileView === "main" ? (
             <MainToolbarContent
               onHighlighterClick={() => setMobileView("highlighter")}
               onLinkClick={() => setMobileView("link")}
@@ -264,7 +282,7 @@ export function SimpleEditor() {
             />
           ) : (
             <MobileToolbarContent
-              type={mobileView === "highlighter" ? "highlighter" : "link"}
+              type={effectiveMobileView === "highlighter" ? "highlighter" : "link"}
               onBack={() => setMobileView("main")}
             />
           )}
