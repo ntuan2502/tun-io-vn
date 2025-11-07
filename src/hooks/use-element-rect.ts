@@ -105,7 +105,7 @@ export function useElementRect({
 
   useEffect(() => {
     if (!enabled || !isClientSide()) {
-      setRect(initialRect)
+      setTimeout(() => setRect(initialRect), 0)
       return
     }
 
@@ -130,13 +130,12 @@ export function useElementRect({
     window.addEventListener("resize", handleUpdate, true)
 
     cleanup.push(() => {
-      window.removeEventListener("scroll", handleUpdate)
-      window.removeEventListener("resize", handleUpdate)
+      window.removeEventListener("scroll", handleUpdate, true)
+      window.removeEventListener("resize", handleUpdate, true)
     })
 
     return () => {
       cleanup.forEach((fn) => fn())
-      setRect(initialRect)
     }
   }, [enabled, getTargetElement, updateRect, useResizeObserver])
 
