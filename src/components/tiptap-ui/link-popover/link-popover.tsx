@@ -262,7 +262,7 @@ export const LinkPopover = forwardRef<HTMLButtonElement, LinkPopoverProps>(
 
     useEffect(() => {
       if (autoOpenOnLinkActive && isActive) {
-        setIsOpen(true)
+        setTimeout(() => setIsOpen(true), 0)
       }
     }, [autoOpenOnLinkActive, isActive])
 
