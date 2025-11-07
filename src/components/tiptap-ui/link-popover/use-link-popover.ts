@@ -105,7 +105,7 @@ export function useLinkHandler(props: LinkHandlerProps) {
     const { href } = editor.getAttributes("link")
 
     if (isLinkActive(editor) && url === null) {
-      setUrl(href || "")
+      setTimeout(() => setUrl(href || ""), 0)
     }
   }, [editor, url])
 
