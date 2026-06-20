@@ -2,10 +2,11 @@
 
 import { motion } from "framer-motion";
 import { Mail, MapPin, Contact2 } from "lucide-react";
-import { cvData } from "@/data/cv";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Contact() {
-  const info = cvData.personalInfo;
+  const { t, data } = useLanguage();
+  const info = data.cvData.personalInfo;
 
   return (
     <section id="contact" className="py-24 bg-secondary/30 relative">
@@ -15,7 +16,7 @@ export default function Contact() {
           <div className="flex flex-col space-y-2">
             <h2 className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-2">
               <Contact2 className="size-6 text-primary" />
-              <span>Thông tin liên hệ</span>
+              <span>{t("contact.title")}</span>
             </h2>
             <div className="h-1 w-12 bg-primary rounded-full" />
           </div>
@@ -30,7 +31,7 @@ export default function Contact() {
               className="space-y-6"
             >
               <p className="text-base text-muted-foreground leading-relaxed text-center">
-                Nếu bạn đang tìm kiếm một nhân sự vận hành hệ thống IT (IT Operations), hỗ trợ kỹ thuật (IT Support) có tư duy lập trình và tối ưu hóa quy trình tự động, hãy kết nối với mình qua các kênh dưới đây. Mình luôn sẵn sàng cho những cơ hội hợp tác mới!
+                {t("contact.desc")}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -42,7 +43,7 @@ export default function Contact() {
                     <Mail className="size-5" />
                   </div>
                   <div>
-                    <span className="font-mono text-[10px] text-muted-foreground block uppercase">Email</span>
+                    <span className="font-mono text-[10px] text-muted-foreground block uppercase">{t("contact.email")}</span>
                     <span className="text-sm font-semibold text-foreground group-hover:underline break-all">
                       {info.email}
                     </span>
@@ -54,7 +55,7 @@ export default function Contact() {
                     <MapPin className="size-5" />
                   </div>
                   <div>
-                    <span className="font-mono text-[10px] text-muted-foreground block uppercase">Địa chỉ</span>
+                    <span className="font-mono text-[10px] text-muted-foreground block uppercase">{t("contact.address")}</span>
                     <span className="text-sm font-semibold text-foreground">
                       {info.location}
                     </span>

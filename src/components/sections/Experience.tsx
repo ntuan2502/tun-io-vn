@@ -1,11 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Terminal, Calendar, Briefcase, ChevronRight } from "lucide-react";
-import { cvData, Experience as ExpType } from "@/data/cv";
+import { Terminal, Calendar, Briefcase, ChevronRight, Building2 } from "lucide-react";
+import { Experience as ExpType } from "@/data/cv";
+import { useLanguage } from "@/context/LanguageContext";
 
 function ExpLogCard({ exp, index }: { exp: ExpType; index: number }) {
   const isCurrentlyActive = exp.status === "active";
+  const { t } = useLanguage();
+  const [logoError, setLogoError] = useState(false);
 
   return (
     <motion.div
@@ -27,16 +31,43 @@ function ExpLogCard({ exp, index }: { exp: ExpType; index: number }) {
       {/* Main Card */}
       <div className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm group-hover:shadow-md hover:border-primary/30 transition-all duration-300">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/50 pb-4 mb-4">
-          <div className="space-y-1.5">
-            <span className="font-mono text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-primary/10 text-primary w-fit inline-block">
-              {isCurrentlyActive ? "sys.log // ACTIVE_DEPLOYMENT" : "sys.log // ARCHIVED"}
-            </span>
-            <h3 className="text-lg font-bold text-foreground">
-              {exp.company}
-            </h3>
-            <p className="text-sm font-semibold text-primary font-mono flex items-center gap-1">
-              <ChevronRight className="size-4" /> {exp.role}
-            </p>
+          <div className="flex items-start gap-3">
+            {exp.logoUrl && !logoError ? (
+              <div className="w-10 h-10 rounded-xl bg-white border border-border/80 p-1 flex items-center justify-center overflow-hidden shrink-0 mt-1">
+                <img
+                  src={exp.logoUrl}
+                  alt={exp.company}
+                  onError={() => setLogoError(true)}
+                  className="max-w-full max-h-full object-contain"
+                />
+              </div>
+            ) : (
+              <div className="w-10 h-10 rounded-xl bg-secondary border border-border/80 flex items-center justify-center shrink-0 mt-1">
+                <Building2 className="size-5 text-muted-foreground" />
+              </div>
+            )}
+            <div className="space-y-1.5">
+              <span className="font-mono text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-primary/10 text-primary w-fit inline-block">
+                {isCurrentlyActive ? t("exp.active") : t("exp.archived")}
+              </span>
+              <h3 className="text-lg font-bold text-foreground leading-snug">
+                {exp.companyUrl ? (
+                  <a
+                    href={exp.companyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-primary transition-colors inline-flex items-center gap-1"
+                  >
+                    {exp.company}
+                  </a>
+                ) : (
+                  exp.company
+                )}
+              </h3>
+              <p className="text-sm font-semibold text-primary font-mono flex items-center gap-1">
+                <ChevronRight className="size-4" /> {exp.role}
+              </p>
+            </div>
           </div>
 
           <div className="flex flex-col items-start sm:items-end gap-2 text-xs font-mono text-muted-foreground shrink-0">
@@ -49,7 +80,7 @@ function ExpLogCard({ exp, index }: { exp: ExpType; index: number }) {
         {/* Responsibilities list */}
         <div className="space-y-3">
           <span className="font-mono text-[11px] font-bold text-muted-foreground block">
-            OPERATIONAL_LOG:
+            {t("exp.log_header")}
           </span>
           <ul className="space-y-2.5 text-sm text-muted-foreground">
             {exp.responsibilities.map((task, idx) => (
@@ -80,7 +111,8 @@ function ExpLogCard({ exp, index }: { exp: ExpType; index: number }) {
 }
 
 export default function Experience() {
-  const experiences = cvData.experience;
+  const { t, data } = useLanguage();
+  const experiences = data.cvData.experience;
 
   return (
     <section id="experience" className="py-24 relative overflow-hidden">
@@ -95,7 +127,7 @@ export default function Experience() {
           <div className="flex flex-col space-y-2">
             <h2 className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-2">
               <Briefcase className="size-6 text-primary" />
-              <span>Kinh nghiệm làm việc</span>
+              <span>{t("exp.title")}</span>
             </h2>
             <div className="h-1 w-12 bg-primary rounded-full" />
           </div>

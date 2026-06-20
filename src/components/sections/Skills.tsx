@@ -2,10 +2,11 @@
 
 import { motion } from "framer-motion";
 import { Cpu, Terminal, CheckCircle2 } from "lucide-react";
-import { cvData } from "@/data/cv";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Skills() {
-  const skills = cvData.skills;
+  const { t, data } = useLanguage();
+  const skills = data.cvData.skills;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -28,7 +29,7 @@ export default function Skills() {
           <div className="flex flex-col space-y-2">
             <h2 className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-2">
               <Cpu className="size-6 text-primary" />
-              <span>Kỹ năng & Chuyên môn</span>
+              <span>{t("skills.title")}</span>
             </h2>
             <div className="h-1 w-12 bg-primary rounded-full" />
           </div>

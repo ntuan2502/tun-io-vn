@@ -3,13 +3,14 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Mail, FileText, MapPin, RefreshCw, Cpu, Activity, Clock, ShieldCheck } from "lucide-react";
+import { Mail, MapPin, RefreshCw, Cpu, Activity, Clock, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cvData } from "@/data/cv";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Hero() {
   const [isFlipped, setIsFlipped] = useState(false);
-  const info = cvData.personalInfo;
+  const { t, data } = useLanguage();
+  const info = data.cvData.personalInfo;
 
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
@@ -37,7 +38,7 @@ export default function Hero() {
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-secondary/50 text-primary text-xs font-semibold font-mono w-fit"
           >
             <Activity className="size-3.5 animate-pulse" />
-            <span>IT Operations Status: Online</span>
+            <span>{t("hero.status.online")}</span>
           </motion.div>
 
           <motion.div
@@ -47,7 +48,7 @@ export default function Hero() {
             className="space-y-3"
           >
             <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-foreground leading-tight">
-              Xin chào, mình là <br />
+              <span dangerouslySetInnerHTML={{ __html: t("hero.greeting") }} /><br />
               <span className="text-primary font-extrabold tracking-tighter bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
                 {info.fullName}
               </span>
@@ -63,9 +64,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-base sm:text-lg text-muted-foreground max-w-xl leading-relaxed"
           >
-            Chuyên viên CNTT với 3 năm kinh nghiệm thực tế về vận hành, tối ưu hóa hệ thống máy chủ,
-            quản trị mạng và hỗ trợ kỹ thuật doanh nghiệp. Đam mê thiết lập hệ thống tự động,
-            đảm bảo tính ổn định và an toàn thông tin tối đa cho hạ tầng số.
+            {t("hero.desc")}
           </motion.p>
 
           <motion.div
@@ -91,16 +90,7 @@ export default function Hero() {
               className="bg-primary hover:bg-primary/95 text-primary-foreground font-medium px-6 py-5 rounded-xl transition-all duration-300 shadow-md shadow-primary/10"
             >
               <a href={`mailto:${info.email}`}>
-                <Mail className="mr-2 size-4" /> Liên Hệ Qua Email
-              </a>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              className="border-border bg-card/50 hover:bg-accent font-medium px-6 py-5 rounded-xl transition-all duration-300"
-            >
-              <a href={info.resumeUrl} target="_blank" rel="noopener noreferrer">
-                <FileText className="mr-2 size-4" /> Xem Bản PDF
+                <Mail className="mr-2 size-4" /> {t("hero.btn.email")}
               </a>
             </Button>
           </motion.div>
@@ -134,10 +124,10 @@ export default function Hero() {
                 </div>
                 <div className="w-full text-center mt-3">
                   <h3 className="font-mono text-sm font-semibold tracking-wider text-muted-foreground uppercase flex items-center justify-center gap-1.5">
-                    Nguyen Anh Tuan
+                    {info.fullName}
                   </h3>
                   <p className="text-[11px] text-primary/80 font-mono mt-1 flex items-center justify-center gap-1">
-                    <RefreshCw className="size-3 animate-spin-slow" /> Click để xem trạng thái hệ thống
+                    <RefreshCw className="size-3 animate-spin-slow" /> {t("hero.click.status")}
                   </p>
                 </div>
               </div>
@@ -156,26 +146,26 @@ export default function Hero() {
 
                   <div className="space-y-2.5 pt-1 text-muted-foreground">
                     <div className="flex justify-between items-center">
-                      <span className="flex items-center gap-1"><Clock className="size-3 text-primary" /> System Uptime:</span>
+                      <span className="flex items-center gap-1"><Clock className="size-3 text-primary" /> {t("hero.terminal.uptime")}</span>
                       <span className="text-foreground font-semibold">99.99%</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="flex items-center gap-1"><Cpu className="size-3 text-primary" /> Active Skills:</span>
+                      <span className="flex items-center gap-1"><Cpu className="size-3 text-primary" /> {t("hero.terminal.skills")}</span>
                       <span className="text-foreground font-semibold">Windows/Linux</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="flex items-center gap-1"><ShieldCheck className="size-3 text-primary" /> Security Layer:</span>
+                      <span className="flex items-center gap-1"><ShieldCheck className="size-3 text-primary" /> {t("hero.terminal.security")}</span>
                       <span className="text-foreground font-semibold">Fortinet FW</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="flex items-center gap-1">📍 Local Ping:</span>
-                      <span className="text-foreground font-semibold">2ms (Biên Hòa)</span>
+                      <span className="flex items-center gap-1">📍 {t("hero.terminal.ping")}</span>
+                      <span className="text-foreground font-semibold">{t("hero.terminal.pingval")}</span>
                     </div>
                   </div>
                 </div>
 
                 <div className="border-t border-border pt-3 mt-4 text-[10px] text-center text-primary/80 flex items-center justify-center gap-1">
-                  <RefreshCw className="size-3" /> Click để xem ảnh hồ sơ
+                  <RefreshCw className="size-3" /> {t("hero.click.avatar")}
                 </div>
               </div>
             </motion.div>
