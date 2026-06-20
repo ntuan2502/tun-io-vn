@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Terminal, Calendar, Briefcase, ChevronRight, Building2 } from "lucide-react";
 import { Experience as ExpType } from "@/data/cv";
@@ -33,10 +34,12 @@ function ExpLogCard({ exp, index }: { exp: ExpType; index: number }) {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/50 pb-4 mb-4">
           <div className="flex items-start gap-3">
             {exp.logoUrl && !logoError ? (
-              <div className="w-10 h-10 rounded-xl bg-white border border-border/80 p-1 flex items-center justify-center overflow-hidden shrink-0 mt-1">
-                <img
+              <div className="relative w-10 h-10 rounded-xl bg-white border border-border/80 p-1 flex items-center justify-center overflow-hidden shrink-0 mt-1">
+                <Image
                   src={exp.logoUrl}
                   alt={exp.company}
+                  width={40}
+                  height={40}
                   onError={() => setLogoError(true)}
                   className="max-w-full max-h-full object-contain"
                 />
