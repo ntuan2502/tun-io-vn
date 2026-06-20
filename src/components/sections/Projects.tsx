@@ -31,7 +31,7 @@ const projects: ProjectCardProps[] = [
   {
     name: "Headless CMS & Landing Pages",
     description: "Xây dựng hệ thống quản trị nội dung Headless CMS (Strapi) làm backend cấp dữ liệu tin tức cho ứng dụng di động; Triển khai và vận hành các landing page quảng cáo trên máy chủ web IIS.",
-    metrics: "IIS Server, tamsoatungthuvu.dymmedicalcenter.com.vn",
+    metrics: "Marketing: Tầm soát ung thư 2025",
     tags: ["Strapi CMS", "IIS Server", "Node.js", "Web Hosting"],
     icon: <Server className="size-6 text-primary" />,
     url: "https://tamsoatungthuvu.dymmedicalcenter.com.vn/",

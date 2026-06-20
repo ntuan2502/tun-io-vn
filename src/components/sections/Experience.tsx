@@ -39,8 +39,8 @@ function ExpLogCard({ exp, index }: { exp: ExpType; index: number }) {
             </p>
           </div>
 
-          <div className="flex flex-col items-start sm:items-end gap-2 text-xs font-mono text-muted-foreground">
-            <span className="flex items-center gap-1.5 bg-secondary/80 px-2.5 py-1 rounded-lg border border-border/50">
+          <div className="flex flex-col items-start sm:items-end gap-2 text-xs font-mono text-muted-foreground shrink-0">
+            <span className="flex items-center gap-1.5 bg-secondary/80 px-2.5 py-1 rounded-lg border border-border/50 whitespace-nowrap">
               <Calendar className="size-3.5" /> {exp.period}
             </span>
           </div>

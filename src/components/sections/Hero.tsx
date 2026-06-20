@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { FileText, MapPin, RefreshCw, Cpu, Activity, Clock, ShieldCheck } from "lucide-react";
+import { Mail, FileText, MapPin, RefreshCw, Cpu, Activity, Clock, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cvData } from "@/data/cv";
 
@@ -90,20 +90,8 @@ export default function Hero() {
               asChild
               className="bg-primary hover:bg-primary/95 text-primary-foreground font-medium px-6 py-5 rounded-xl transition-all duration-300 shadow-md shadow-primary/10"
             >
-              <a href="https://zalo.me/0868608700">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="mr-2 size-4 shrink-0"
-                >
-                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-                  <path d="M9 10h6l-6 5h6" />
-                </svg>
-                Liên Hệ Qua Zalo
+              <a href={`mailto:${info.email}`}>
+                <Mail className="mr-2 size-4" /> Liên Hệ Qua Email
               </a>
             </Button>
             <Button

@@ -27,7 +27,6 @@ export interface CVData {
     fullName: string;
     role: string;
     experienceYears: number;
-    phone: string;
     email: string;
     location: string;
     dob: string;
@@ -48,18 +47,6 @@ export interface CVData {
   }[];
   experience: Experience[];
   skills: SkillCategory[];
-  languages: {
-    language: string;
-    level: string;
-    percentage: number;
-  }[];
-  references: {
-    name: string;
-    role: string;
-    company: string;
-    email: string;
-    phone: string;
-  }[];
 }
 
 export const cvData: CVData = {
@@ -67,7 +54,6 @@ export const cvData: CVData = {
     fullName: "Nguyễn Anh Tuấn",
     role: "IT Specialist / IT Operations & Support",
     experienceYears: 3,
-    phone: "+84 868 608 700",
     email: "ntuan.2502@gmail.com",
     location: "Trấn Biên, Đồng Nai, Việt Nam",
     dob: "25/02/1997",
@@ -102,11 +88,8 @@ export const cvData: CVData = {
       status: "active",
       tags: ["IT Support", "Fortinet Firewall", "Conference Room Systems", "Asset Management", "Software Dev"],
       responsibilities: [
-        "Thiết lập và cấu hình hệ thống mạng doanh nghiệp mới tích hợp tường lửa Fortinet bảo mật cao.",
-        "Triển khai và vận hành giải pháp trang thiết bị cho hệ thống các phòng họp hội nghị (Conference Room) hiện đại.",
-        "Quản trị và tối ưu quy trình vận hành phần mềm quản lý tài sản thiết bị CNTT của toàn doanh nghiệp.",
-        "Tham gia thiết kế, phát triển và bảo trì các ứng dụng/phần mềm nội bộ phục vụ nhu cầu nghiệp vụ của các phòng ban.",
-        "Duy trì hoạt động ổn định của hệ thống CNTT và cung cấp dịch vụ hỗ trợ kỹ thuật người dùng cuối (Helpdesk) chất lượng cao."
+        "Thiết lập hạ tầng mạng doanh nghiệp mới với tường lửa Fortinet và giải pháp phòng họp hội nghị (Conference Room) hiện đại.",
+        "Phát triển các ứng dụng nội bộ hỗ trợ nghiệp vụ kết hợp quản trị phần mềm quản lý tài sản và hỗ trợ kỹ thuật người dùng cuối."
       ]
     },
     {
@@ -117,13 +100,8 @@ export const cvData: CVData = {
       status: "completed",
       tags: ["Windows Server", "Networking", "Virtualization", "Python Scripting", "Strapi", "IIS"],
       responsibilities: [
-        "Quản trị hạ tầng máy chủ, mạng nội bộ và hệ thống CCTV; duy trì tỷ lệ hoạt động (uptime) 99% trong giờ làm việc và thiết lập hệ thống UPS dự phòng.",
-        "Thiết lập các giải pháp CNTT lưu động (máy tính, máy chủ, máy siêu âm) phục vụ khám sức khỏe ngoại viện và đồng bộ dữ liệu thời gian thực giữa onsite/insite.",
-        "Thiết lập mạng và phần cứng máy tính cho chi nhánh mới tại Quận 7 (10/2023) và dự án mở rộng chi nhánh Quận 1 (08/2024) giúp tối ưu thời gian triển khai.",
-        "Triển khai phần mềm PACS lưu trữ hình ảnh y khoa cho 3 chi nhánh (Q1, Q7, HN), tối ưu hóa thời gian truy xuất hình ảnh 70% và giảm chi phí in phim.",
-        "Quản lý cấp phát và kiểm kê tài sản IT (60 máy tính, 70 tài khoản Google Workspace, VoIP PBX) kết hợp quản trị Active Directory.",
-        "Viết các script Python tự động tiền xử lý và chuẩn hóa tên file điện tâm đồ (ECG), tiết kiệm 25 phút vận hành mỗi ngày và giảm lỗi nhập liệu.",
-        "Xây dựng backend Strapi Headless CMS hỗ trợ ứng dụng di động và triển khai các landing page chạy quảng cáo trên máy chủ web IIS."
+        "Vận hành hạ tầng máy chủ (đạt 99% uptime), thiết lập mạng chi nhánh mới và triển khai hệ thống PACS lưu trữ hình ảnh y khoa.",
+        "Viết các script Python tự động hóa xử lý file ECG (tiết kiệm 25p/ngày), quản lý tài sản CNTT và xây dựng ứng dụng web/CMS."
       ]
     },
     {
@@ -133,8 +111,8 @@ export const cvData: CVData = {
       status: "completed",
       tags: ["IT Support", "Hardware Deployment"],
       responsibilities: [
-        "Hỗ trợ vận chuyển, lắp đặt phần cứng phục vụ các sự kiện khám sức khỏe lưu động ngoại viện.",
-        "Thiết lập cấu hình máy tính kết nối trực tiếp với thiết bị siêu âm để tối ưu hóa quá trình đo khám tại chỗ."
+        "Lắp đặt và bàn giao thiết bị phần cứng phục vụ các sự kiện khám sức khỏe lưu động ngoại viện.",
+        "Cấu hình máy tính kết nối với thiết bị siêu âm nhằm tối ưu hóa quá trình đo khám tại chỗ."
       ]
     },
     {
@@ -144,8 +122,8 @@ export const cvData: CVData = {
       status: "completed",
       tags: ["Node.js", "React", "Custom Tools"],
       responsibilities: [
-        "Phát triển các công cụ tự động hóa nhỏ và hỗ trợ kỹ thuật xử lý sự cố hệ thống theo yêu cầu của khách hàng cá nhân.",
-        "Thiết lập và quản trị các máy chủ chạy môi trường Linux / Windows Server cá nhân phục vụ mục đích chạy thử nghiệm phần mềm."
+        "Phát triển công cụ tự động hóa nhỏ và hỗ trợ kỹ thuật xử lý sự cố hệ thống theo yêu cầu.",
+        "Thiết lập, quản trị máy chủ Linux / Windows Server phục vụ chạy thử nghiệm phần mềm."
       ]
     },
     {
@@ -155,8 +133,8 @@ export const cvData: CVData = {
       status: "completed",
       tags: [".NET", "C#", "SQL Server"],
       responsibilities: [
-        "Tham gia thiết kế và xây dựng các dịch vụ API phía Backend sử dụng nền tảng .NET.",
-        "Thiết kế cấu trúc cơ sở dữ liệu SQL Server, tối ưu hóa hiệu năng truy vấn phục vụ các luồng dữ liệu nghiệp vụ chính."
+        "Tham gia thiết kế và xây dựng hệ thống API phía Backend sử dụng nền tảng .NET.",
+        "Thiết kế cơ sở dữ liệu SQL Server và tối ưu hóa hiệu năng truy vấn cho các luồng nghiệp vụ."
       ]
     },
     {
@@ -167,55 +145,67 @@ export const cvData: CVData = {
       tags: ["PHP", "Laravel", "MySQL"],
       responsibilities: [
         "Phát triển và bảo trì hệ thống API cho các dự án ứng dụng web sử dụng PHP Laravel.",
-        "Tối ưu hóa logic xử lý nghiệp vụ của phần mềm và làm việc với hệ cơ sở dữ liệu MySQL nhằm duy trì tính ổn định của mã nguồn."
+        "Tối ưu hóa logic xử lý và quản trị cơ sở dữ liệu MySQL nhằm duy trì tính ổn định của mã nguồn."
       ]
     }
   ],
   skills: [
     {
-      category: "Quản trị Hệ thống & Máy chủ",
-      items: ["Windows Server AD", "File Sharing", "IIS Web Server", "Google Workspace Admin", "VoIP PBX System", "Synology NAS", "Access Control (RFID/Fingerprint/FaceID)", "Ubuntu/Linux"]
+      category: "Quản trị Hệ thống & Dịch vụ",
+      items: [
+        "Windows Server",
+        "Ubuntu / Linux",
+        "IIS / Nginx / Caddy",
+        "Microsoft 365 / Google Workspace",
+        "VoIP PBX Systems",
+        "Synology NAS",
+        "Access Control (RFID / Fingerprint / FaceID)"
+      ]
     },
     {
-      category: "Ảo hóa & Cloud",
-      items: ["Hyper-V", "Proxmox VE", "VMware vSphere", "AWS (EC2, S3)"]
+      category: "Ảo hóa & Hạ tầng Mạng",
+      items: [
+        "Proxmox VE / VMware / Hyper-V",
+        "Fortinet / OPNsense / DrayTek",
+        "Ruckus / Cambium Wi-Fi",
+        "Wireguard / Tailscale VPN"
+      ]
     },
     {
-      category: "Mạng & Bảo mật (Networking)",
-      items: ["Fortinet Firewall", "Barracuda", "Ruckus / Cambium Wifi", "TP-Link / DrayTek", "VPN Site-to-Site", "VPN Wireguard/Tailscale"]
+      category: "Lập trình Frontend",
+      items: [
+        "JavaScript / TypeScript",
+        "Next.js / React",
+        "Tailwind CSS",
+        "Shadcn UI"
+      ]
     },
     {
-      category: "Lập trình & Tự động hóa",
-      items: ["Python Scripting", "JavaScript / TypeScript", "Node.js (Express)", "React / Next.js", "PostgreSQL"]
+      category: "Lập trình Backend & Database",
+      items: [
+        "Node.js (NestJS / Express)",
+        "Firebase",
+        "GraphQL",
+        "PostgreSQL"
+      ]
+    },
+    {
+      category: "DevOps & Quy trình",
+      items: [
+        "Docker / Containerization",
+        "CI/CD Processes",
+        "Vercel Deployment",
+        "Git Version Control"
+      ]
     },
     {
       category: "Vận hành & Hỗ trợ Kỹ thuật",
-      items: ["Helpdesk / End-user Support", "Hardware Maintenance (PC/UPS)", "CCTV Systems (Hikvision, Imou)", "Printers & Copiers (Ricoh, FujiXerox, Canon)"]
-    },
-    {
-      category: "Kỹ năng mềm",
-      items: ["Quản lý thời gian", "Làm việc nhóm", "Giải quyết sự cố (Troubleshooting)", "Giao tiếp & Tư duy dịch vụ (Customer Support)"]
-    }
-  ],
-  languages: [
-    {
-      language: "Tiếng Việt",
-      level: "Bản xứ",
-      percentage: 100
-    },
-    {
-      language: "Tiếng Anh",
-      level: "Giao tiếp cơ bản / Đọc hiểu tài liệu kỹ thuật",
-      percentage: 60
-    }
-  ],
-  references: [
-    {
-      name: "Tạ Phi Long",
-      role: "IT Leader",
-      company: "DYM Medical Center Vietnam",
-      email: "long.ta@dymmedicalcenter.com.vn",
-      phone: "+84 964 109 375"
+      items: [
+        "Helpdesk / Support hardware & software",
+        "CCTV (HikVision / Imou / Ezviz)",
+        "Printers (Ricoh / Canon / HP / Fujifilm)",
+        "Engineering Management / Quản lý tài sản / Mua sắm vật tư"
+      ]
     }
   ]
 };
