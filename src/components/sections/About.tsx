@@ -99,10 +99,6 @@ export default function About() {
                     <span className="text-muted-foreground">{t("about.nationality")}:</span>
                     <span className="text-foreground font-medium">{info.nationality}</span>
                   </div>
-                  <div className="flex justify-between py-1 border-b border-border/50">
-                    <span className="text-muted-foreground">{t("about.marital")}:</span>
-                    <span className="text-foreground font-medium">{info.maritalStatus}</span>
-                  </div>
                   <div className="flex justify-between py-1">
                     <span className="text-muted-foreground">{t("about.exp")}:</span>
                     <span className="text-primary font-bold">{info.experienceYears} {t("about.years")}</span>

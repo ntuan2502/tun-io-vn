@@ -33,7 +33,6 @@ export interface CVData {
     location: string;
     dob: string;
     nationality: string;
-    maritalStatus: string;
     gender: string;
     avatarUrl: string;
     resumeUrl: string;
