@@ -12,7 +12,7 @@ export const en: LocaleData = {
       nationality: "Vietnamese",
       gender: "Male",
       avatarUrl: "/avatar.png",
-      resumeUrl: "/resume.pdf",
+      resumeUrl: "/resume/NguyenAnhTuan_Resume_En.pdf",
     },
     goals: {
       shortTerm: [

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Mail, MapPin, RefreshCw, Cpu, Activity, Clock, ShieldCheck } from "lucide-react";
+import { Mail, Download, MapPin, RefreshCw, Cpu, Activity, Clock, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -87,10 +87,19 @@ export default function Hero() {
           >
             <Button
               asChild
-              className="bg-primary hover:bg-primary/95 text-primary-foreground font-medium px-6 py-5 rounded-xl transition-all duration-300 shadow-md shadow-primary/10"
+              className="bg-primary hover:bg-primary/95 text-primary-foreground font-medium px-6 py-5 rounded-xl transition-all duration-300 shadow-md shadow-primary/10 cursor-pointer"
             >
               <a href={`mailto:${info.email}`}>
                 <Mail className="mr-2 size-4" /> {t("hero.btn.email")}
+              </a>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="border-border bg-card/50 hover:bg-accent font-medium px-6 py-5 rounded-xl transition-all duration-300 cursor-pointer"
+            >
+              <a href={info.resumeUrl} target="_blank" rel="noopener noreferrer">
+                <Download className="mr-2 size-4" /> {t("hero.btn.download")}
               </a>
             </Button>
           </motion.div>

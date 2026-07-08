@@ -17,7 +17,7 @@ export const vi: LocaleData = {
       nationality: "Việt Nam",
       gender: "Nam",
       avatarUrl: "/avatar.png",
-      resumeUrl: "/resume.pdf",
+      resumeUrl: "/resume/NguyenAnhTuan_Resume_Vi.pdf",
     },
     goals: {
       shortTerm: [
